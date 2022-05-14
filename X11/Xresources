@@ -1,0 +1,4 @@
+Xft.dpi: 192
+URxvt.background: black
+URxvt.foreground: white
+URxvt.font: xft:source code pro:regular:pixelsize=18
