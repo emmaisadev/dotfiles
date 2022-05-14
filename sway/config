@@ -219,4 +219,6 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-
+# Misc
+# Prevent clipboard clear on close
+exec wl-paste -t text --watch clipman store --no-persist
