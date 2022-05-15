@@ -1,0 +1,46 @@
+theme = "modern"
+icons = "awesome"
+
+
+[[block]]
+block = "music"
+player = "spotify"
+buttons = ["prev", "play", "next"]
+hide_when_empty=true
+
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
+format = "{average}"
+chip = "k10temp-*"
+good=50
+idle=70
+warning=80
+inputs = ["Tctl", "Tdie"]
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{mem_used_percents}"
+format_swap = "{swap_used_percents}"
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m}"
+
+
+[[block]]
+block = "time"
+interval = 5
+format = "%a %d/%m %R"
+
