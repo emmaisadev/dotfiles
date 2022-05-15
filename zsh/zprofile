@@ -1,0 +1,26 @@
+source /etc/os-release
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+# zsh-history-substring-search configuration
+bindkey '^[[A' history-substring-search-up # or '\eOA'
+bindkey '^[[B' history-substring-search-down # or '\eOB'
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+mmrk8s() {
+    export KUBECONFIG=/home/danielthorpe/.kube/mmr-config
+}
+cbgk8s() {
+    export KUBECONFIG=/home/danielthorpe/.kube/cbg-config
+}
+DEVKITPRO=/opt/devkitpro
+DEVKITARM=/opt/devkitpro/devkitARM
+DEVKITPPC=/opt/devkitpro/devkitPPC
+if [ -z $DISPLAY  ] && [ "$(tty)" = "/dev/tty1"  ]; then
+    exec sway
+fi
+eval $(thefuck --alias)
+
+if [ "$ID" = "arch" ]; then
+    alias pbcopy="xclip -sel clip"
+    alias pbpaste="xclip -out -sel clip"
+fi
