@@ -1,0 +1,27 @@
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+set $barheight 25
+set $seperator ⏽
+set $padding 0
+
+bar {
+    position top
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    font $statusfont
+    height $barheight
+    separator_symbol $seperator
+    status_command i3status-rs $HOME/.config/i3status-rust/right.toml
+    colors {
+        pango_markup enabled
+        background          $sbar_bg
+        statusline          $sbar_status
+        focused_background  $sbar_focused_bg
+        focused_workspace   $sbar_focused_ws
+        inactive_workspace  $sbar_inactive_ws
+        active_workspace    $sbar_active_ws
+        urgent_workspace    $sbar_urgent_ws
+    }
+}
