@@ -47,6 +47,9 @@ input 1133:45091:Logitech_Wireless_Mouse_MX_Master_3 {
 # Misc
 # Prevent clipboard clear on close
 exec wl-paste -t text --watch clipman store --no-persist
+# Ensure that the notifier is running
 exec dunst &
+exec gsettings set org.cinnamon.desktop.default-applications.terminal exec /usr/bin/footclient
 
 include /home/danielthorpe/.config/sway/config.d/*
+include /etc/sway/config.d/*
