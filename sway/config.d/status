@@ -13,7 +13,7 @@ bar {
     font $statusfont
     height $barheight
     separator_symbol $seperator
-    status_command i3status-rs $HOME/.config/i3status-rust/right.toml
+    status_command i3status-rs $HOME/.config/i3status-rust/config.toml
     colors {
         pango_markup enabled
         background          $sbar_bg
