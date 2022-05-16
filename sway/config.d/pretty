@@ -1,3 +1,4 @@
+smart_gaps on
 gaps inner 10
 gaps outer 5
 for_window [class="^.*"] border pixel 4
