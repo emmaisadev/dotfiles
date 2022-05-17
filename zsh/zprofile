@@ -18,8 +18,14 @@ if [ "$(uname -s)" != "Darwin" ]; then
 fi
 # macOS specific configuration
 if [ "$(uname -s)" = "Darwin" ]; then
-    # Use the version of GPG that behaves with smartcards (may not be necessary anymore?)
-    export PATH="/usr/local/opt/gnupg@2.2/bin:$PATH"
+    # Add MacPorts to PATH 
+    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+    if [ "$(hostname)" == *"Work"* ]; then
+        # Set work PythonPath
+        export PYTHONPATH=$PYTHONPATH:$HOME/code/solution_performance/PythonLib:$HOME/code/uiautomation:$HOME/code/regression/Workspace_Web_UI_Tests/PythonLib:$HOME/code/versioning
+        # Add JMeter to PATH
+        export PATH=$PATH:$HOME/.bin/apache-jmeter-5.4.3/bin
+    fi
 fi
 # GPG configuration
 export GPG_TTY="$(tty)"
@@ -38,5 +44,10 @@ cbgk8s() {
 }
 # Enable thefuck
 eval $(thefuck --alias)
-
+# Misc aliases
+alias cls=clear
+alias enby=man
+# Misc variables
+export THEFUCK_PRIORITY="git_hook_bypass=1100"
+export PATH=$HOME/.bin:$PATH
 
