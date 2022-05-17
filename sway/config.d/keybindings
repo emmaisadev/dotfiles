@@ -2,6 +2,7 @@
 #
 # Basics:
 #
+    bindsym $mod+Space exec $menu
     # start a terminal
     bindsym $mod+Return exec $term
     bindsym $mod+c exec clipman pick -t wofi
@@ -100,7 +101,7 @@
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Mod1+space focus mode_toggle
 
     # move focus to the parent container
     bindsym $mod+a focus parent

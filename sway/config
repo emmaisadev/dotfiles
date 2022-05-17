@@ -10,7 +10,7 @@ set $down h
 set $up t
 set $right n
 # Your preferred terminal emulator
-set $term foot
+set $term footclient
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -48,7 +48,10 @@ input 1133:45091:Logitech_Wireless_Mouse_MX_Master_3 {
 # Prevent clipboard clear on close
 exec wl-paste -t text --watch clipman store --no-persist
 # Ensure that the notifier is running
-exec dunst &
+exec {
+    dunst &
+    foot --server
+}
 exec gsettings set org.cinnamon.desktop.default-applications.terminal exec /usr/bin/footclient
 
 include /home/danielthorpe/.config/sway/config.d/*
