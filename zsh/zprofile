@@ -20,7 +20,7 @@ fi
 if [ "$(uname -s)" = "Darwin" ]; then
     # Add MacPorts to PATH 
     export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-    if [ "$(hostname)" == *"Work"* ]; then
+    if [ "$(hostname -s)" = "DanielskBookPro" ]; then
         # Set work PythonPath
         export PYTHONPATH=$PYTHONPATH:$HOME/code/solution_performance/PythonLib:$HOME/code/uiautomation:$HOME/code/regression/Workspace_Web_UI_Tests/PythonLib:$HOME/code/versioning
         # Add JMeter to PATH
