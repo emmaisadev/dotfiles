@@ -22,12 +22,17 @@ alert = 50
 warning = 40
 
 [[block]]
+block = "battery"
+interval = 10
+format = "{percentage} {time}"
+
+[[block]]
 block = "temperature"
 collapsed = false
 interval = 10
-format = "{min} min, {max} max, {average} avg"
-chip = "k10temp-*"
-inputs = ["Tctl", "Tdie"]
+format = "{average} avg"
+chip = "coretemp-isa-*"
+inputs = ["Package id 0"]
 
 [[block]]
 block = "net"
