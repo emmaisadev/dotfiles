@@ -1,0 +1,5 @@
+Match host * exec "gpg-connect-agent UPDATESTARTUPTTY /bye"
+Host citrix-github
+    Hostname github.com
+    IdentityFile ~/.ssh/id_danielthor_citrix_github
+    IdentitiesOnly  yes
