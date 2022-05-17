@@ -1,0 +1,14 @@
+[user]
+	name = Daniel T. Thorpe
+	email = daniel.thorpe@citrix.com
+	signingkey = 379F1E22D0914DDA
+[core]
+    # hooksPath = /Users/danielthorpe/.hooks
+	excludesfile = /Users/danielthorpe/.hooks/.gitignore
+	precomposeUnicode = true
+[commit]
+	gpgsign = true
+[alias]
+    both-merged = !git-both-merged
+    cleanup = !git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -d
+    cleanup-merged = !git branch --merged | grep -v $(git branch | grep \\* | cut -d ' ' -f2) | awk '{print $1}' | xargs    git branch -d
