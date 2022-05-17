@@ -1,4 +1,27 @@
-source /etc/os-release
+# Linux specific configuration
+if [ "$(uname -s)" != "Darwin" ]; then
+    source /etc/os-release
+    # Arch Linux specific configuration
+    if [ "$ID" = "arch" ]; then
+        # Add macOS aliases
+        alias pbcopy="xclip -sel clip"
+        alias pbpaste="xclip -out -sel clip"
+    fi
+    # Start sway
+    if [ -z $DISPLAY  ] && [ "$(tty)" = "/dev/tty1"  ]; then
+        exec sway
+    fi
+    # Set up devKitPro
+    export DEVKITPRO=/opt/devkitpro
+    export DEVKITARM=/opt/devkitpro/devkitARM
+    export DEVKITPPC=/opt/devkitpro/devkitPPC
+fi
+# macOS specific configuration
+if [ "$(uname -s)" = "Darwin" ]; then
+    # Use the version of GPG that behaves with smartcards (may not be necessary anymore?)
+    export PATH="/usr/local/opt/gnupg@2.2/bin:$PATH"
+fi
+# GPG configuration
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
@@ -6,21 +29,14 @@ gpgconf --launch gpg-agent
 bindkey '^[[A' history-substring-search-up # or '\eOA'
 bindkey '^[[B' history-substring-search-down # or '\eOB'
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+# Functions to enable .kube/config
 mmrk8s() {
-    export KUBECONFIG=/home/danielthorpe/.kube/mmr-config
+    export KUBECONFIG=$HOME/.kube/mmr-config
 }
 cbgk8s() {
-    export KUBECONFIG=/home/danielthorpe/.kube/cbg-config
+    export KUBECONFIG=$HOME/.kube/cbg-config
 }
-DEVKITPRO=/opt/devkitpro
-DEVKITARM=/opt/devkitpro/devkitARM
-DEVKITPPC=/opt/devkitpro/devkitPPC
-if [ -z $DISPLAY  ] && [ "$(tty)" = "/dev/tty1"  ]; then
-    exec sway
-fi
+# Enable thefuck
 eval $(thefuck --alias)
 
-if [ "$ID" = "arch" ]; then
-    alias pbcopy="xclip -sel clip"
-    alias pbpaste="xclip -out -sel clip"
-fi
+
