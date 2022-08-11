@@ -1,0 +1,100 @@
+### Key bindings
+#
+# Basics:
+#
+    bindsym $mod+Space exec $menu
+    # start a terminal
+    bindsym $mod+Return exec $term
+    bindsym $mod+c exec clipman pick -t wofi
+    # kill focused window
+    bindsym $mod+Shift+q kill
+
+
+    # Start file Manager
+    bindsym $mod+e exec nemo
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    # Screen recording and printing
+    bindsym --release Print exec grim -g "$(slurp)" - | swappy -f -
+    bindsym --release Print+Shift exec ~/.config/sway/grimshot.sh
+
+    # Next and previous Workspaces
+    bindsym $mod+z workspace prev
+    bindsym $mod+x workspace next
+#
+# Moving around:
+#
+    # or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # _move_ the focused window with the same, but add Shift
+    #bindsym $mod+Shift+$left move left
+    #bindsym $mod+Shift+$down move down
+    #bindsym $mod+Shift+$up move up
+    #bindsym $mod+Shift+$right move right
+    # ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+h or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+h splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    # bindsym $mod+s layout stacking
+    # bindsym $mod+w layout tabbed
+    # bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+Mod1+space focus mode_toggle
+
+    # move focus to the parent container
+    bindsym $mod+a focus parent
+
+
+#
+# Audio controls
+#
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+#
+# Backlight controls
+#
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+
+#
+# Pause play music:
+#
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
