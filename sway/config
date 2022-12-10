@@ -52,6 +52,7 @@ exec wl-paste -t text --watch clipman store --no-persist
 exec {
     dunst &
     foot --server
+    /usr/bin/lxqt-policykit-agent &
 }
 exec gsettings set org.cinnamon.desktop.default-applications.terminal exec /usr/bin/footclient
 
