@@ -9,6 +9,13 @@ if [ "$(uname -s)" != "Darwin" ]; then
     fi
     # Start sway
     if [ -z $DISPLAY  ] && [ "$(tty)" = "/dev/tty1"  ]; then
+        export QT_QPA_PLATFORM="wayland;xcb"
+        export QT_QPA_PLATFORMTHEME=qt5ct
+        export CLUTTER_BACKEND=wayland
+        export SDL_VIDEODRIVER=wayland
+        export WINIT_UNIX_BACKEND=x11
+        export MOZ_ENABLE_WAYLAND=1
+#        exec /usr/bin/lxqt-policykit-agent
         exec sway
     fi
     # Set up devKitPro
@@ -53,3 +60,6 @@ alias enby=man
 export THEFUCK_PRIORITY="git_hook_bypass=1100"
 export PATH=$HOME/.bin:$PATH
 
+if [ "$SSH_CLIENT" ] || [ "$SSH_TTY" ]; then
+    export PS1=%M\ $PS1
+fi
