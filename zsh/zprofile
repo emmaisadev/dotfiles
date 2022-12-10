@@ -60,3 +60,6 @@ alias enby=man
 export THEFUCK_PRIORITY="git_hook_bypass=1100"
 export PATH=$HOME/.bin:$PATH
 
+if [ "$SSH_CLIENT" ] || [ "$SSH_TTY" ]; then
+    export PS1=%M\ $PS1
+fi
