@@ -10,10 +10,11 @@ set $ws9  9
 set $ws10  10
 
 #### Assignments
-assign [class="bravebrowser"]       workspace $ws1
-assign [class="foot"]               workspace $ws2
+assign [app_id="brave-browser"]       workspace $ws1
+assign [app_id="firefox"]           workspace $ws1
+assign [app_id="foot"]               workspace $ws2
 assign [class="discord"]            workspace $ws3
-assign [class="Thunderbird"]        workspace $ws5
+assign [app_id="thunderbird"]        workspace $ws5
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
