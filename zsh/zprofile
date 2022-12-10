@@ -15,7 +15,7 @@ if [ "$(uname -s)" != "Darwin" ]; then
         export SDL_VIDEODRIVER=wayland
         export WINIT_UNIX_BACKEND=x11
         export MOZ_ENABLE_WAYLAND=1
-#        exec /usr/bin/lxqt-policykit-agent
+        exec /usr/bin/lxqt-policykit-agent
         exec sway
     fi
     # Set up devKitPro
@@ -27,17 +27,11 @@ fi
 if [ "$(uname -s)" = "Darwin" ]; then
     # Add MacPorts to PATH 
     export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-    if [ "$(hostname -s)" = "DanielskBookPro" ]; then
-        # Set work PythonPath
-        export PYTHONPATH=$PYTHONPATH:$HOME/code/solution_performance/PythonLib:$HOME/code/uiautomation:$HOME/code/regression/Workspace_Web_UI_Tests/PythonLib:$HOME/code/versioning
-        # Add JMeter to PATH
-        export PATH=$PATH:$HOME/.bin/apache-jmeter-5.4.3/bin
-    fi
 fi
 # GPG configuration
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+#export GPG_TTY="$(tty)"
+#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#gpgconf --launch gpg-agent
 # zsh-history-substring-search configuration
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -51,15 +45,16 @@ mmrk8s() {
 cbgk8s() {
     export KUBECONFIG=$HOME/.kube/cbg-config
 }
-# Enable thefuck
-eval $(thefuck --alias)
 # Misc aliases
 alias cls=clear
 alias enby=man
 # Misc variables
 export THEFUCK_PRIORITY="git_hook_bypass=1100"
-export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin:$HOME/.local/bin:$PATH
 
 if [ "$SSH_CLIENT" ] || [ "$SSH_TTY" ]; then
     export PS1=%M\ $PS1
 fi
+
+# Enable thefuck
+eval $(thefuck --alias)
