@@ -28,9 +28,9 @@ if [ "$(uname -s)" = "Darwin" ]; then
     export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 fi
 # GPG configuration
-#export GPG_TTY="$(tty)"
-#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-#gpgconf --launch gpg-agent
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
 # zsh-history-substring-search configuration
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
