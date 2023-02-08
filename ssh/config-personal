@@ -1,3 +1,2 @@
-Host *.github.com
-    AddKeysToAgent yes
+Host *
     IdentityFile ~/.ssh/id_ed25519_sk_5C-P
