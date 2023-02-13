@@ -29,6 +29,19 @@ if [ "$(uname -s)" = "Darwin" ]; then
         source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
         PS1='$(kube_ps1)'$PS1
     fi
+    export LW_PROFILE=dev7
+    awsswitch() {
+        account=`python3 $HOME/.bin/aws_selector.py`
+        export AWS_PROFILE=$account
+    }
+    alias lw=lacework
+    if type brew &>/dev/null; then
+        FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+        autoload -Uz compinit
+        compinit
+    fi
+
 fi
 # zsh-history-substring-search configuration
 bindkey '^[[A' history-substring-search-up
