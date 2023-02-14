@@ -1,5 +1,7 @@
+platform=$(uname -s)
+
 # Linux specific configuration
-if [ "$(uname -s)" != "Darwin" ]; then
+if [ $platform != "Darwin" ]; then
     source /etc/os-release
     # Arch Linux specific configuration
     if [ "$ID" = "arch" ]; then
@@ -20,47 +22,58 @@ if [ "$(uname -s)" != "Darwin" ]; then
     export DEVKITARM=/opt/devkitpro/devkitARM
     export DEVKITPPC=/opt/devkitpro/devkitPPC
 fi
+
 # macOS specific configuration
-if [ "$(uname -s)" = "Darwin" ]; then
+if [ $platform = "Darwin" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # Import homebrew zsh completions
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+    
     # Add MacPorts to PATH 
     export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-    if [ "$(uname -m)" = "arm64" ]; then
-        export PATH="/opt/homebrew/bin:$PATH"
-        source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
-        PS1='$(kube_ps1)'$PS1
-    fi
-    export LW_PROFILE=dev7
-    awsswitch() {
-        account=`python3 $HOME/.bin/aws_selector.py`
-        export AWS_PROFILE=$account
-    }
-    alias lw=lacework
-    if type brew &>/dev/null; then
-        FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-        autoload -Uz compinit
-        compinit
+    # Run work-specific items if the machine is MDM' d
+    if [ "$(profiles status -type enrollment | grep -o 'Enrolled via DEP: Yes')" = "Enrolled via DEP: Yes" ]; then
+        export LW_PROFILE=dev7
+        awsswitch() {
+            account=`python3 $HOME/.bin/aws_selector.py`
+            export AWS_PROFILE=$account
+        }
+        alias lw=lacework
+        case $ITERM_PROFILE in
+            Kubernetes)
+            source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+            PS1='$(kube_ps1)'$PS1
+            export KUBECONFIG=/temp/temp.cfg
+            ;;
+        esac
     fi
-
 fi
+
 # zsh-history-substring-search configuration
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
 # Functions to enable .kube/config
 cbgk8s() {
     export KUBECONFIG=$HOME/.kube/cbg-config
 }
+
 # Misc aliases
 alias cls=clear
-alias enby=man
+
 # Misc variables
 export THEFUCK_PRIORITY="git_hook_bypass=1100"
 export PATH=$HOME/.bin:$HOME/.local/bin:$PATH
 export EDITOR=vim
 
+# Show hostname if this is a remote session
 if [ "$SSH_CLIENT" ] || [ "$SSH_TTY" ]; then
     export PS1=%M\ $PS1
 fi
