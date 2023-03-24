@@ -1,2 +1,65 @@
+#zmodload zsh/zprof
 source ~/.antigenrc
-source ~/.zprofile
+
+# Show hostname if this is a remote session
+if [ "$SSH_CLIENT" ] || [ "$SSH_TTY" ]; then
+    export PS1=%M\ $PS1
+fi
+
+# zsh-history-substring-search configuration
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+if [ $SYSTEM_PLATFORM = "Darwin" ]; then
+    # Import homebrew zsh completions
+    if [[ "$FPATH" != *"$HOMEBREW_PREFIX/share/zsh/site-functions"* ]]; then
+       FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH
+    fi
+    
+        case $ITERM_PROFILE in
+            Kubernetes)
+            source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+            PS1='$(kube_ps1)'$PS1
+            export KUBECONFIG=/temp/temp.cfg
+            ;;
+        esac
+else
+# Linux specific configuration
+    # Start sway
+    if [ -z $DISPLAY  ] && [ "$(tty)" = "/dev/tty1"  ]; then
+        export QT_QPA_PLATFORM="wayland;xcb"
+        export QT_QPA_PLATFORMTHEME=qt5ct
+        export CLUTTER_BACKEND=wayland
+        export SDL_VIDEODRIVER=wayland
+        export WINIT_UNIX_BACKEND=x11
+        export MOZ_ENABLE_WAYLAND=1
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        exec sway
+    fi
+fi
+
+# Shell functions
+awsswitch() {
+    account=`python3 $HOME/.bin/aws_selector.py`
+    export AWS_PROFILE=$account
+}
+decodeaws() {
+    aws sts decode-authorization-message --encoded-message $1 --query DecodedMessage --output text
+}
+
+# Misc variables
+export THEFUCK_PRIORITY="git_hook_bypass=1100"
+
+# Enable thefuck
+eval $(thefuck --alias)
+
+autoload -Uz compinit
+if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
+autoload -U +X bashcompinit && bashcompinit
