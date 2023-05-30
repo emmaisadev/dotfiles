@@ -18,7 +18,11 @@ if [ $SYSTEM_PLATFORM = "Darwin" ]; then
     if [[ "$FPATH" != *"$HOMEBREW_PREFIX/share/zsh/site-functions"* ]]; then
        FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH
     fi
-    
+
+    # Import gcloud completions
+    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
         case $ITERM_PROFILE in
             Kubernetes)
             source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
