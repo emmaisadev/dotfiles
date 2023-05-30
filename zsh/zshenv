@@ -1,0 +1,20 @@
+export SYSTEM_PLATFORM=$(uname -s)
+export SYSTEM_ARCH=$(uname -m)
+
+
+if [ $SYSTEM_PLATFORM = "Darwin" ]; then
+else # assume we're on Linux
+    # Set up devKitPro
+    export DEVKITPRO=/opt/devkitpro
+    export DEVKITARM=/opt/devkitpro/devkitARM
+    export DEVKITPPC=/opt/devkitpro/devkitPPC
+fi
+
+# Misc variables
+export PATH=$HOME/.bin:$HOME/.local/bin:$PATH
+export EDITOR=vim
+export LW_PROFILE=dev7
+
+# Misc aliases
+alias cls=clear
+alias lw=lacework
