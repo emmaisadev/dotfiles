@@ -1,7 +1,7 @@
 [user]
 	name = Daniel Thorpe\n
 	email = daniel@danielthorpe.me
-	signingKey = /Users/danielthorpe/.ssh/id_ed25519_sk_5C-P.pub
+	signingKey = /home/danielthorpe/.ssh/id_ed25519_sk_5C-P.pub
 [core]
 	editor = vim
 [pull]
