@@ -16,7 +16,7 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 if [ $SYSTEM_PLATFORM = "Darwin" ]; then
     # Import homebrew zsh completions
     if [[ "$FPATH" != *"$HOMEBREW_PREFIX/share/zsh/site-functions"* ]]; then
-       FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH
+       FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH:+:${FPATH}}
     fi
 
     # Import gcloud completions
