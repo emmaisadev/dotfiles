@@ -1,0 +1,6 @@
+if [ $SYSTEM_PLATFORM = "Darwin" ]; then
+    if [ $SYSTEM_ARCH = "arm64" ]; then
+        # Setup brew arm64
+        export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+    fi
+fi
