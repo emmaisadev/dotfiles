@@ -1,3 +1,6 @@
+# PATH should be set here, not in zshenv
+export PATH=$HOME/.bin:$HOME/.local/bin${PATH:+:${PATH}}
+
 if [ $SYSTEM_PLATFORM = "Darwin" ]; then
     if [ $SYSTEM_ARCH = "arm64" ]; then
         # Setup brew arm64

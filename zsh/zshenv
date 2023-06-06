@@ -19,19 +19,13 @@ if [ $SYSTEM_PLATFORM = "Darwin" ]; then
         export HOMEBREW_PREFIX="/usr/local";
         export HOMEBREW_CELLAR="/usr/local/Cellar";
         export HOMEBREW_REPOSITORY="/usr/local/Homebrew";
-        export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
         export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}:";
         export INFOPATH="/usr/local/share/info:${INFOPATH:-}";
     fi
 else # assume we're on Linux
-    # Set up devKitPro
-    export DEVKITPRO=/opt/devkitpro
-    export DEVKITARM=/opt/devkitpro/devkitARM
-    export DEVKITPPC=/opt/devkitpro/devkitPPC
 fi
 
 # Misc variables
-export PATH=$HOME/.bin:$HOME/.local/bin${PATH:+:${PATH}}
 export EDITOR=vim
 
 # Misc aliases
