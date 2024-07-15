@@ -56,5 +56,5 @@ exec {
 }
 exec gsettings set org.cinnamon.desktop.default-applications.terminal exec /usr/bin/footclient
 
-include /home/danielthorpe/.config/sway/config.d/*
+include /home/emmathorpe/.config/sway/config.d/*
 include /etc/sway/config.d/*

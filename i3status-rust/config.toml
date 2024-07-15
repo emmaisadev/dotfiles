@@ -14,7 +14,7 @@ warning = 60
 
 [[block]]
 block = "disk_space"
-path = "/home/danielthorpe"
+path = "/home/emmathorpe"
 info_type = "used"
 format = "$icon HOME: $used/$total ($available free)"
 alert = 80

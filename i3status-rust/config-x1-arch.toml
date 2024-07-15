@@ -14,7 +14,7 @@ warning = 60
 
 [[block]]
 block = "disk_space"
-path = "/home/danielthorpe"
+path = "/home/emmathorpe"
 info_type = "used"
 format = "$icon HOME: $used/$total ($available free)"
 alert = 80
@@ -36,12 +36,6 @@ block = "net"
 device = "wlan0"
 format = "^icon_net_down $speed_down.eng(prefix:K) ^icon_net_up $speed_up.eng(prefix:K)"
 interval = 5
-
-[[block]]
-block = "external_ip"
-format = "$ip"
-interval = 3600
-
 
 [[block]]
 block = "memory"
