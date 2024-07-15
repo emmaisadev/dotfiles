@@ -18,18 +18,6 @@ if [ $SYSTEM_PLATFORM = "Darwin" ]; then
     if [[ "$FPATH" != *"$HOMEBREW_PREFIX/share/zsh/site-functions"* ]]; then
        FPATH=$HOMEBREW_PREFIX/share/zsh/site-functions${FPATH:+:${FPATH}}
     fi
-
-    # Import gcloud completions
-    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
-
-        case $ITERM_PROFILE in
-            Kubernetes)
-            source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
-            PS1='$(kube_ps1)'$PS1
-            export KUBECONFIG=/temp/temp.cfg
-            ;;
-        esac
 else
 # Linux specific configuration
     # Start sway
@@ -46,10 +34,6 @@ else
 fi
 
 # Shell functions
-awsswitch() {
-    account=`python3 $HOME/.bin/aws_selector.py`
-    export AWS_PROFILE=$account
-}
 decodeaws() {
     aws sts decode-authorization-message --encoded-message $1 --query DecodedMessage --output text
 }
@@ -58,7 +42,7 @@ decodeaws() {
 export THEFUCK_PRIORITY="git_hook_bypass=1100"
 
 # Enable thefuck
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 
 autoload -Uz compinit
 if [ $(date +'%j') != $(date -r ${ZDOTDIR:-$HOME}/.zcompdump +'%j') ]; then
