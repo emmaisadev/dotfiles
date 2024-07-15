@@ -14,6 +14,7 @@ assign [app_id="brave-browser"]       workspace $ws1
 assign [app_id="firefox"]           workspace $ws1
 assign [app_id="foot"]               workspace $ws2
 assign [class="discord"]            workspace $ws3
+assign [app_id="im.dino.Dino"]      workspace $ws3
 assign [app_id="thunderbird"]        workspace $ws5
 
 # switch to workspace
