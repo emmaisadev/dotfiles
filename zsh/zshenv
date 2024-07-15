@@ -12,8 +12,6 @@ if [ $SYSTEM_PLATFORM = "Darwin" ]; then
         export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
         # Work variables and aliases
-        export LW_PROFILE=dev7
-        alias lw=lacework
     else
         # Setup brew x86
         export HOMEBREW_PREFIX="/usr/local";
